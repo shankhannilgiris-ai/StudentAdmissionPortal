@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- =====================================================================
+     File    : web.xml  (Deployment Descriptor)
+     Purpose : Tells Tomcat which Servlet class handles which URL,
+               which page opens first, the session timeout, error pages
+               and where the uploaded files are stored on the disk.
+     Version : Servlet 4.0 (Apache Tomcat 9.x, javax.servlet package)
+     ===================================================================== -->
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <display-name>StudentPortalServlet</display-name>
+
+    <!-- ============ Context parameter ============
+         Folder that CONTAINS the "uploads" directory of the PHP module.
+         FileServlet joins this with file_path from the database,
+         e.g. C:/xampp/htdocs/StudentAdmissionPortal/PHP + uploads/images/x.png
+         CHANGE THIS PATH to match your computer. -->
+    <context-param>
+        <param-name>uploadBaseDir</param-name>
+        <param-value>C:/xampp/htdocs/StudentAdmissionPortal/PHP</param-value>
+    </context-param>
+
+    <!-- ============ Servlet declarations ============ -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.studentportal.servlet.LoginServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>LogoutServlet</servlet-name>
+        <servlet-class>com.studentportal.servlet.LogoutServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>DashboardServlet</servlet-name>
+        <servlet-class>com.studentportal.servlet.DashboardServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>StudentListServlet</servlet-name>
+        <servlet-class>com.studentportal.servlet.StudentListServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>StudentProfileServlet</servlet-name>
+        <servlet-class>com.studentportal.servlet.StudentProfileServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>FileServlet</servlet-name>
+        <servlet-class>com.studentportal.servlet.FileServlet</servlet-class>
+    </servlet>
+
+    <!-- ============ URL mappings ============ -->
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>LogoutServlet</servlet-name>
+        <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>DashboardServlet</servlet-name>
+        <url-pattern>/DashboardServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>StudentListServlet</servlet-name>
+        <url-pattern>/StudentListServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>StudentProfileServlet</servlet-name>
+        <url-pattern>/StudentProfileServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>FileServlet</servlet-name>
+        <url-pattern>/FileServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- ============ Session timeout (minutes) ============ -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>   <!-- JavaScript cannot read the session cookie -->
+        </cookie-config>
+    </session-config>
+
+    <!-- ============ First page ============ -->
+    <welcome-file-list>
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- ============ Friendly error pages ============ -->
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/error.jsp</location>
+    </error-page>
+</web-app>

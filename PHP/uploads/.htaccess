@@ -1,0 +1,14 @@
+# =====================================================================
+# File    : uploads/.htaccess
+# Purpose : Security - uploaded files must never be executed as scripts.
+#           Even if someone renames a PHP file to .jpg and uploads it,
+#           Apache will refuse to run any script stored in this folder.
+# =====================================================================
+
+# Block every PHP-like file inside uploads/ and its sub folders
+<FilesMatch "\.(php|phtml|php3|php4|php5|php7|phar|pl|py|cgi|sh)$">
+    Require all denied
+</FilesMatch>
+
+# Do not show a list of files when the folder itself is opened
+Options -Indexes

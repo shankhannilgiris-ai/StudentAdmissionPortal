@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<!-- =====================================================================
+     File    : index.html
+     Purpose : Student Registration Form (static front-end page).
+               The form is validated by script.js and then submitted
+               to the PHP module (../PHP/insert_student.php) which
+               validates it again and saves it in MySQL.
+     ===================================================================== -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- viewport meta tag makes the media queries work on mobile phones -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration | Student Admission Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ===== Simple header ===== -->
+    <header class="site-header">
+        <h1>Student Admission Portal</h1>
+        <p>Online Registration with File Management System</p>
+    </header>
+
+    <!-- ===== Navigation links to the PHP module ===== -->
+    <nav class="nav-bar">
+        <a href="index.html">Register</a>
+        <a href="../PHP/view_students.php">View Students</a>
+        <a href="../PHP/upload_file.php">Upload Files</a>
+    </nav>
+
+    <main class="main-content">
+
+        <!-- ===== Card style container (center aligned) ===== -->
+        <div class="card form-card">
+            <h2>Student Registration Form</h2>
+            <p class="hint">Fields marked with <span class="required">*</span> are mandatory.</p>
+            <br>
+
+            <!--
+                method="post"                     -> data is sent in the request body (not in the URL)
+                enctype="multipart/form-data"     -> REQUIRED for file uploads
+                onsubmit="return validateForm()"  -> form is submitted only if JavaScript returns true
+                novalidate                        -> turn off browser popups so our own messages are shown
+            -->
+            <form name="registrationForm" action="../PHP/insert_student.php" method="post"
+                  enctype="multipart/form-data" onsubmit="return validateForm('add')"
+                  onreset="return resetForm()" novalidate>
+
+                <!-- 1. Student Name -->
+                <div class="form-group">
+                    <label for="name">Student Name <span class="required">*</span></label>
+                    <input type="text" id="name" name="name" maxlength="100" placeholder="Enter full name">
+                    <span class="error" id="err_name"></span>
+                </div>
+
+                <!-- 2. Roll Number -->
+                <div class="form-group">
+                    <label for="roll_number">Roll Number <span class="required">*</span></label>
+                    <input type="text" id="roll_number" name="roll_number" maxlength="20" placeholder="e.g. 22CSE001">
+                    <span class="hint">Format: Year (2 digits) + Department (2-4 letters) + Number (3 digits)</span>
+                    <span class="error" id="err_roll_number"></span>
+                </div>
+
+                <!-- 3. Email -->
+                <div class="form-group">
+                    <label for="email">Email <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" maxlength="100" placeholder="name@example.com">
+                    <span class="error" id="err_email"></span>
+                </div>
+
+                <!-- 4. Password -->
+                <div class="form-group">
+                    <label for="password">Password <span class="required">*</span></label>
+                    <input type="password" id="password" name="password" maxlength="50" placeholder="Enter a strong password">
+                    <span class="hint">Minimum 8 characters, one uppercase, one lowercase and one number.</span>
+                    <span class="error" id="err_password"></span>
+                </div>
+
+                <!-- 5. Course Dropdown -->
+                <div class="form-group">
+                    <label for="course">Course <span class="required">*</span></label>
+                    <select id="course" name="course">
+                        <option value="">-- Select Course --</option>
+                        <option value="B.E Computer Science and Engineering">B.E Computer Science and Engineering</option>
+                        <option value="B.E Electronics and Communication Engineering">B.E Electronics and Communication Engineering</option>
+                        <option value="B.E Electrical and Electronics Engineering">B.E Electrical and Electronics Engineering</option>
+                        <option value="B.E Mechanical Engineering">B.E Mechanical Engineering</option>
+                        <option value="B.E Civil Engineering">B.E Civil Engineering</option>
+                        <option value="B.Tech Information Technology">B.Tech Information Technology</option>
+                    </select>
+                    <span class="error" id="err_course"></span>
+                </div>
+
+                <!-- 6. Mobile Number -->
+                <div class="form-group">
+                    <label for="mobile">Mobile Number <span class="required">*</span></label>
+                    <input type="text" id="mobile" name="mobile" maxlength="10" placeholder="10 digit mobile number">
+                    <span class="error" id="err_mobile"></span>
+                </div>
+
+                <!-- 7. Gender Radio Buttons (same "name" so only one can be selected) -->
+                <div class="form-group">
+                    <label>Gender <span class="required">*</span></label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="gender" value="Male"> Male</label>
+                        <label><input type="radio" name="gender" value="Female"> Female</label>
+                        <label><input type="radio" name="gender" value="Other"> Other</label>
+                    </div>
+                    <span class="error" id="err_gender"></span>
+                </div>
+
+                <!-- 8. Address Textarea -->
+                <div class="form-group">
+                    <label for="address">Address <span class="required">*</span></label>
+                    <textarea id="address" name="address" rows="3" placeholder="Door no, street, city, pincode"></textarea>
+                    <span class="error" id="err_address"></span>
+                </div>
+
+                <!-- 9. Profile Image Upload (accept attribute filters the file chooser) -->
+                <div class="form-group">
+                    <label for="profile_image">Profile Image <span class="required">*</span></label>
+                    <input type="file" id="profile_image" name="profile_image"
+                           accept=".jpg,.jpeg,.png" onchange="previewImage(this, 'imagePreview')">
+                    <span class="hint">Allowed: JPG, JPEG, PNG &nbsp;|&nbsp; Maximum size: 2 MB</span>
+                    <img id="imagePreview" class="preview-img" src="" alt="Image preview">
+                    <span class="error" id="err_profile_image"></span>
+                </div>
+
+                <!-- 10. Certificate Upload -->
+                <div class="form-group">
+                    <label for="certificate">Certificate <span class="required">*</span></label>
+                    <input type="file" id="certificate" name="certificate" accept=".pdf,.jpg,.jpeg,.png">
+                    <span class="hint">Allowed: PDF, JPG, JPEG, PNG &nbsp;|&nbsp; Maximum size: 2 MB</span>
+                    <span class="error" id="err_certificate"></span>
+                </div>
+
+                <!-- 11. Submit Button and 12. Reset Button -->
+                <div class="button-row">
+                    <input type="submit" class="btn btn-primary" value="Submit">
+                    <input type="reset" class="btn btn-secondary" value="Reset">
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- ===== Simple footer ===== -->
+    <footer class="site-footer">
+        &copy; 2026 Student Admission Portal | Department of Computer Science and Engineering
+    </footer>
+
+    <!-- JavaScript is loaded at the end so that all HTML elements already exist -->
+    <script src="script.js"></script>
+</body>
+</html>

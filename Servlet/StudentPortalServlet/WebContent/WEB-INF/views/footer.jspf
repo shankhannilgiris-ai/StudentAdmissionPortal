@@ -1,0 +1,13 @@
+<%--
+    =====================================================================
+    File    : footer.jspf  (JSP fragment, statically included)
+    Purpose : Common bottom part of every protected JSP page.
+    =====================================================================
+--%>
+    </main>
+
+    <footer class="site-footer">
+        &copy; 2026 Student Admission Portal | JSP - Servlet - JDBC - MySQL
+    </footer>
+</body>
+</html>

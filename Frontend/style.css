@@ -1,0 +1,483 @@
+/* =====================================================================
+   File    : style.css
+   Purpose : Common stylesheet for the Student Admission Portal.
+             Used by Frontend/index.html and by every PHP page.
+   Colors  : Blue (#1f4e8c), White (#ffffff), Gray (#f2f4f7 / #6b7280)
+   ===================================================================== */
+
+/* ---------- 1. Basic reset ---------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;          /* padding is included inside width */
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f2f4f7;       /* light gray page background */
+    color: #333333;
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;                   /* flex column keeps footer at bottom */
+    flex-direction: column;
+}
+
+a {
+    color: #1f4e8c;
+}
+
+/* ---------- 2. Simple header ---------- */
+.site-header {
+    background-color: #1f4e8c;       /* main blue */
+    color: #ffffff;
+    padding: 16px 20px;
+    text-align: center;
+}
+
+.site-header h1 {
+    font-size: 24px;
+    letter-spacing: 0.5px;
+}
+
+.site-header p {
+    font-size: 14px;
+    color: #dbe6f5;
+}
+
+/* Navigation bar below the header */
+.nav-bar {
+    background-color: #163a69;       /* darker blue */
+    text-align: center;
+    padding: 8px 10px;
+}
+
+.nav-bar a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 14px;
+    display: inline-block;
+    padding: 4px 6px;
+}
+
+.nav-bar a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- 3. Main area : center aligned ---------- */
+.main-content {
+    flex: 1;                         /* fills remaining height */
+    width: 100%;
+    max-width: 1150px;
+    margin: 25px auto;
+    padding: 0 16px;
+}
+
+/* ---------- 4. Card style container ---------- */
+.card {
+    background-color: #ffffff;
+    border: 1px solid #d9dee5;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    padding: 25px 30px;
+    margin: 0 auto 25px auto;
+}
+
+.form-card {
+    max-width: 650px;                /* registration form stays narrow and centered */
+}
+
+.card h2 {
+    color: #1f4e8c;
+    font-size: 20px;
+    border-bottom: 2px solid #1f4e8c;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    color: #1f4e8c;
+    font-size: 17px;
+    margin: 15px 0 10px 0;
+}
+
+/* ---------- 5. Form layout and styled input fields ---------- */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.required {
+    color: #c62828;                  /* red star for mandatory fields */
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="file"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 9px 10px;
+    font-size: 14px;
+    border: 1px solid #b8c0cc;
+    border-radius: 4px;
+    background-color: #ffffff;
+    font-family: inherit;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Blue outline when a field is active */
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #1f4e8c;
+    box-shadow: 0 0 3px rgba(31, 78, 140, 0.5);
+}
+
+/* Red border added by JavaScript when a field is invalid */
+.input-error {
+    border-color: #c62828 !important;
+}
+
+/* Radio buttons in one line */
+.radio-group label {
+    display: inline-block;
+    font-weight: normal;
+    margin-right: 18px;
+}
+
+.hint {
+    display: block;
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 3px;
+}
+
+/* ---------- 6. Styled error messages ---------- */
+.error {
+    display: block;
+    color: #c62828;
+    font-size: 13px;
+    margin-top: 4px;
+    min-height: 0;
+}
+
+/* Alert boxes for server messages */
+.alert {
+    padding: 12px 15px;
+    border-radius: 4px;
+    margin-bottom: 18px;
+    font-size: 14px;
+}
+
+.alert ul {
+    margin-left: 20px;
+}
+
+.alert-success {
+    background-color: #e7f6ea;
+    border: 1px solid #81c784;
+    color: #1b5e20;
+}
+
+.alert-error {
+    background-color: #fdecea;
+    border: 1px solid #e57373;
+    color: #b71c1c;
+}
+
+.alert-info {
+    background-color: #e8f0fb;
+    border: 1px solid #90b4e6;
+    color: #163a69;
+}
+
+/* ---------- 7. Styled buttons ---------- */
+.btn {
+    display: inline-block;
+    padding: 9px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #ffffff;
+    font-family: inherit;
+}
+
+.btn-primary {
+    background-color: #1f4e8c;
+}
+
+.btn-primary:hover {
+    background-color: #163a69;
+}
+
+.btn-secondary {
+    background-color: #6b7280;       /* gray */
+}
+
+.btn-secondary:hover {
+    background-color: #4b5563;
+}
+
+.btn-danger {
+    background-color: #c62828;
+}
+
+.btn-danger:hover {
+    background-color: #9e1f1f;
+}
+
+.btn-small {
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+.button-row {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button-row .btn {
+    margin: 0 6px;
+}
+
+/* Inline form used for the Delete button inside tables */
+.inline-form {
+    display: inline;
+}
+
+/* ---------- 8. Image previews ---------- */
+.preview-img {
+    display: none;                   /* shown by JavaScript after selecting a file */
+    margin-top: 8px;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #b8c0cc;
+    border-radius: 4px;
+}
+
+.thumb {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid #d9dee5;
+}
+
+.profile-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 2px solid #1f4e8c;
+}
+
+.no-image {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #e5e7eb;
+    color: #6b7280;
+    font-size: 10px;
+    border-radius: 4px;
+}
+
+.no-image.large {
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    font-size: 14px;
+}
+
+/* ---------- 9. Tables ---------- */
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;                /* table scrolls sideways on small screens */
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background-color: #ffffff;
+}
+
+.data-table th {
+    background-color: #1f4e8c;
+    color: #ffffff;
+    text-align: left;
+    padding: 10px;
+}
+
+.data-table td {
+    padding: 9px 10px;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+.data-table tr:nth-child(even) td {
+    background-color: #f7f9fc;       /* zebra stripes for readability */
+}
+
+.data-table tr:hover td {
+    background-color: #eef3fb;
+}
+
+.actions a,
+.actions form {
+    margin: 2px;
+}
+
+/* Two column details table on the profile page */
+.details-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.details-table th {
+    width: 35%;
+    text-align: left;
+    background-color: #f2f4f7;
+    padding: 8px 10px;
+    border: 1px solid #e5e7eb;
+}
+
+.details-table td {
+    padding: 8px 10px;
+    border: 1px solid #e5e7eb;
+}
+
+/* Profile page : photo on the left, details on the right */
+.profile-layout {
+    display: flex;
+    gap: 25px;
+    align-items: flex-start;
+}
+
+.profile-photo {
+    text-align: center;
+    flex: 0 0 170px;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+/* ---------- 10. Search bar ---------- */
+.search-form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.search-form input[type="text"] {
+    flex: 1;
+    min-width: 200px;
+    padding: 9px 10px;
+    border: 1px solid #b8c0cc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.top-bar h2 {
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.muted {
+    color: #6b7280;
+}
+
+/* ---------- 11. Simple footer ---------- */
+.site-footer {
+    background-color: #1f4e8c;
+    color: #ffffff;
+    text-align: center;
+    padding: 12px;
+    font-size: 13px;
+}
+
+/* ---------- 12. Responsive design using media queries ---------- */
+
+/* Tablets */
+@media (max-width: 768px) {
+    .card {
+        padding: 20px;
+    }
+
+    .site-header h1 {
+        font-size: 20px;
+    }
+
+    .profile-layout {
+        flex-direction: column;      /* photo above details */
+        align-items: center;
+    }
+
+    .profile-info {
+        width: 100%;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+    .main-content {
+        margin: 15px auto;
+        padding: 0 10px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .nav-bar a {
+        display: block;              /* menu links stacked vertically */
+        margin: 2px 0;
+    }
+
+    .button-row .btn {
+        display: block;
+        width: 100%;
+        margin: 8px 0;
+    }
+
+    .radio-group label {
+        display: block;
+    }
+
+    .details-table th {
+        width: 45%;
+    }
+}

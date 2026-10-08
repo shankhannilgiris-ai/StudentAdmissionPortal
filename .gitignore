@@ -1,0 +1,25 @@
+# Files uploaded while testing the PHP module (keep only the sample files)
+PHP/uploads/images/*
+PHP/uploads/documents/*
+!PHP/uploads/images/1700000001_arun.png
+!PHP/uploads/images/1700000002_priya.png
+!PHP/uploads/images/1700000003_faizal.png
+!PHP/uploads/documents/1700000001_arun_certificate.pdf
+!PHP/uploads/documents/1700000002_priya_certificate.pdf
+!PHP/uploads/documents/1700000003_faizal_certificate.pdf
+
+# JDBC driver is downloaded separately (see WEB-INF/lib/README.txt)
+*.jar
+
+# Compiled classes and IDE files
+*.class
+build/
+bin/
+.settings/
+.metadata/
+.idea/
+.vscode/
+
+# OS files
+Thumbs.db
+.DS_Store

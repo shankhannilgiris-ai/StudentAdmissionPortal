@@ -1,0 +1,50 @@
+<%--
+    =====================================================================
+    File    : header.jspf  (JSP fragment, statically included)
+    Purpose : Common top part of every protected JSP page.
+              1) Session check - unauthorized users go to login.jsp
+              2) Disables browser cache (Back button after logout)
+              3) Prints the HTML head, header and navigation bar
+    Usage   : <% String pageTitle = "Dashboard"; %>
+              <%@ include file="header.jspf" %>
+    =====================================================================
+--%>
+<%@ page import="com.studentportal.model.Admin" %>
+<%@ page import="com.studentportal.util.SessionUtil" %>
+<%
+    // ----- Do not cache protected pages -----
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    response.setHeader("Pragma", "no-cache");
+    response.setDateHeader("Expires", 0);
+
+    // ----- Restrict page using the session -----
+    Admin loggedInAdmin = (Admin) session.getAttribute(SessionUtil.SESSION_ADMIN);
+    if (loggedInAdmin == null) {
+        response.sendRedirect(request.getContextPath() + "/login.jsp?auth=required");
+        return;   // stop processing the rest of the page
+    }
+%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= SessionUtil.escape(pageTitle) %> | Student Portal (JSP)</title>
+    <!-- contextPath = /StudentPortalServlet, so CSS works from every URL -->
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <h1>Student Admission Portal</h1>
+        <p>Admin Panel - JSP / Servlet / JDBC Module</p>
+    </header>
+
+    <nav class="nav-bar">
+        <a href="DashboardServlet">Dashboard</a>
+        <a href="StudentListServlet">Student List</a>
+        <a href="LogoutServlet">Logout</a>
+        <span class="nav-user">Logged in as: <%= SessionUtil.escape(loggedInAdmin.getFullName()) %></span>
+    </nav>
+
+    <main class="main-content">
